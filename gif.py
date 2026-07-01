@@ -130,7 +130,7 @@ to{opacity:1;}
 <div class="star" style="left:360px;top:150px;"></div>
 <div class="star" style="left:200px;top:20px;"></div>
 
-<div class="text">🌸 Blooming Flower 🌸</div>
+<div class="text">🌸 For You 🌸</div>
 
 <div class="flower">
 
