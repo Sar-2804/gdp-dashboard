@@ -145,8 +145,8 @@ filter: drop-shadow(0 0 10px #ff004c);
 <div class="star" style="left:220px;top:30px;"></div>
 <div class="star" style="left:80px;top:200px;"></div>
 
-<div class="text">🌹 Blooming Red Rose 🌹 <br></div>
-<div class="text">For You</div>
+<div class="text">🌹 Blooming Flower🌹<br> For You</div>
+
 
 
 <div class="flower">
