@@ -19,11 +19,66 @@ background: radial-gradient(circle at top, #1a0023, #000);
 font-family:sans-serif;
 }
 
-/* Scene */
+/* container */
 .scene{
 position:relative;
 width:420px;
 height:600px;
+}
+
+/* ---------------- LETTER CARD ---------------- */
+#letterCard{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.92);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:10;
+}
+
+.letter{
+width:300px;
+padding:25px;
+background:linear-gradient(145deg, #fff0f5, #ffd6e0);
+border-radius:15px;
+box-shadow:0 0 25px #ff2d75;
+text-align:center;
+transform:scale(0);
+animation:popIn 1s forwards;
+}
+
+@keyframes popIn{
+to{transform:scale(1);}
+}
+
+.letter h2{
+color:#ff2d75;
+margin-bottom:10px;
+}
+
+.letter p{
+color:#333;
+font-size:14px;
+}
+
+.openBtn{
+margin-top:15px;
+padding:10px 18px;
+border:none;
+border-radius:20px;
+background:#ff2d75;
+color:white;
+cursor:pointer;
+}
+
+/* hide main scene initially */
+#mainScene{
+opacity:0;
+transition:opacity 1.5s ease;
 }
 
 /* Stars */
@@ -58,7 +113,7 @@ animation:fadeIn 2s 2s forwards;
 to{opacity:1;}
 }
 
-/* Flower container */
+/* Flower */
 .flower{
 position:absolute;
 bottom:60px;
@@ -98,19 +153,10 @@ background:linear-gradient(#2cff6b, #0a7a30);
 border-radius:80px 0;
 }
 
-.left{
-left:-65px;
-top:120px;
-transform:rotate(-35deg);
-}
+.left{left:-65px;top:120px;transform:rotate(-35deg);}
+.right{right:-65px;top:170px;transform:scaleX(-1) rotate(-35deg);}
 
-.right{
-right:-65px;
-top:170px;
-transform:scaleX(-1) rotate(-35deg);
-}
-
-/* Rose SVG */
+/* Rose */
 svg{
 position:absolute;
 left:-120px;
@@ -125,10 +171,7 @@ animation:bloom 2.5s ease-out forwards;
 100%{transform:scale(1) rotate(0deg);}
 }
 
-/* Glow center */
-.glow{
-filter: drop-shadow(0 0 10px #ff004c);
-}
+.glow{filter: drop-shadow(0 0 10px #ff004c);}
 
 </style>
 </head>
@@ -137,7 +180,21 @@ filter: drop-shadow(0 0 10px #ff004c);
 
 <div class="scene">
 
-<!-- Stars -->
+<!-- LETTER CARD -->
+<div id="letterCard">
+  <div class="letter">
+    <h2>💌 A Surprise for You 💌</h2>
+    <p>
+      Someone special has sent you a blooming rose...<br>
+      Click below to open your surprise 🌹
+    </p>
+    <button class="openBtn" onclick="openLetter()">Open</button>
+  </div>
+</div>
+
+<!-- MAIN SCENE -->
+<div id="mainScene">
+
 <div class="star" style="left:30px;top:60px;"></div>
 <div class="star" style="left:120px;top:90px;"></div>
 <div class="star" style="left:320px;top:70px;"></div>
@@ -145,17 +202,13 @@ filter: drop-shadow(0 0 10px #ff004c);
 <div class="star" style="left:220px;top:30px;"></div>
 <div class="star" style="left:80px;top:200px;"></div>
 
-<div class="text">🌹 Blooming Flower🌹<br> For You</div>
-
-
+<div class="text">🌹 Blooming Flower 🌹<br> For You</div>
 
 <div class="flower">
 
-<!-- ROSE SVG -->
 <svg width="240" height="240" viewBox="0 0 240 240" class="glow">
 
 <defs>
-
 <radialGradient id="petal1">
 <stop offset="0%" stop-color="#ffb3c6"/>
 <stop offset="100%" stop-color="#c4003a"/>
@@ -165,12 +218,10 @@ filter: drop-shadow(0 0 10px #ff004c);
 <stop offset="0%" stop-color="#ffd1dc"/>
 <stop offset="100%" stop-color="#ff004c"/>
 </radialGradient>
-
 </defs>
 
 <g transform="translate(120,120)">
 
-<!-- Outer petals -->
 <ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(0) translate(0,-45)"/>
 <ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(45) translate(0,-45)"/>
 <ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(90) translate(0,-45)"/>
@@ -180,7 +231,6 @@ filter: drop-shadow(0 0 10px #ff004c);
 <ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(270) translate(0,-45)"/>
 <ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(315) translate(0,-45)"/>
 
-<!-- Inner petals -->
 <ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(22) translate(0,-30)"/>
 <ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(67) translate(0,-30)"/>
 <ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(112) translate(0,-30)"/>
@@ -190,7 +240,6 @@ filter: drop-shadow(0 0 10px #ff004c);
 <ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(292) translate(0,-30)"/>
 <ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(337) translate(0,-30)"/>
 
-<!-- Center -->
 <path d="
 M-10 10
 C-25 -10,-10 -30,10 -25
@@ -205,13 +254,21 @@ fill="#8b0025"/>
 </svg>
 
 <div class="stem"></div>
-
 <div class="leaf left"></div>
 <div class="leaf right"></div>
 
 </div>
 
 </div>
+
+</div>
+
+<script>
+function openLetter(){
+document.getElementById("letterCard").style.display = "none";
+document.getElementById("mainScene").style.opacity = "1";
+}
+</script>
 
 </body>
 </html>
