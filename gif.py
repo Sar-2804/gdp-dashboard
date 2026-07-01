@@ -137,6 +137,13 @@ filter: drop-shadow(0 0 10px #ff004c);
 <div class="text">🌹 Blooming Flower 🌹<br>For You</div>
 
 <!-- BUTTON -->
+<div id="envelope" class="envelope">
+    <div class="letter">
+        💌<br>
+        Open me...<br>
+        A surprise awaits 🌹
+    </div>
+</div>
 <button onclick="bloomRose()">Open Surprise</button>
 
 <!-- ROSE -->
