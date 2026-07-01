@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title="Blooming Flower", layout="centered")
+st.set_page_config(page_title="Blooming Red Rose", layout="centered")
 
 html = """
 <!DOCTYPE html>
@@ -15,17 +15,18 @@ justify-content:center;
 align-items:center;
 height:100vh;
 overflow:hidden;
-background:linear-gradient(#091540,#000);
+background: radial-gradient(circle at top, #1a0023, #000);
+font-family:sans-serif;
 }
 
+/* Scene */
 .scene{
 position:relative;
-width:400px;
-height:550px;
+width:420px;
+height:600px;
 }
 
 /* Stars */
-
 .star{
 position:absolute;
 width:3px;
@@ -33,17 +34,34 @@ height:3px;
 background:white;
 border-radius:50%;
 animation:blink 2s infinite;
+opacity:0.8;
 }
 
 @keyframes blink{
-50%{opacity:.2;}
+50%{opacity:0.1; transform:scale(0.7);}
 }
 
-/* Flower */
+/* Title */
+.text{
+position:absolute;
+top:20px;
+width:100%;
+text-align:center;
+font-size:28px;
+color:#ffb3c6;
+text-shadow:0 0 15px #ff2d75;
+opacity:0;
+animation:fadeIn 2s 2s forwards;
+}
 
+@keyframes fadeIn{
+to{opacity:1;}
+}
+
+/* Flower container */
 .flower{
 position:absolute;
-bottom:40px;
+bottom:60px;
 left:50%;
 transform:translateX(-50%);
 animation:sway 4s ease-in-out infinite;
@@ -51,79 +69,65 @@ transform-origin:bottom center;
 }
 
 @keyframes sway{
-0%,100%{transform:translateX(-50%) rotate(-2deg);}
-50%{transform:translateX(-50%) rotate(2deg);}
+0%,100%{transform:translateX(-50%) rotate(-3deg);}
+50%{transform:translateX(-50%) rotate(3deg);}
 }
 
+/* Stem */
 .stem{
-width:8px;
-height:240px;
+width:10px;
+height:260px;
+background:linear-gradient(#00ff88, #0a6b2f);
 margin:auto;
-background:linear-gradient(#66ff88,#0a7d30);
 border-radius:20px;
-animation:grow 2s;
+animation:grow 2s ease-out forwards;
+transform-origin:bottom;
 }
 
 @keyframes grow{
 from{height:0;}
-to{height:240px;}
+to{height:260px;}
 }
 
-svg{
-position:absolute;
-left:-110px;
-top:-120px;
-transform:scale(0) rotate(-30deg);
-animation:bloom 2.5s ease-out forwards;
-transform-origin:center;
-}
-
-@keyframes bloom{
-0%{
-    transform:scale(0) rotate(-40deg);
-}
-60%{
-    transform:scale(1.1) rotate(8deg);
-}
-100%{
-    transform:scale(1) rotate(0deg);
-}
-}
-
+/* Leaves */
 .leaf{
 position:absolute;
-width:70px;
-height:35px;
-background:#32cd32;
-border-radius:70px 0;
+width:80px;
+height:40px;
+background:linear-gradient(#2cff6b, #0a7a30);
+border-radius:80px 0;
 }
 
 .left{
-left:-60px;
+left:-65px;
 top:120px;
 transform:rotate(-35deg);
 }
 
 .right{
-right:-60px;
+right:-65px;
 top:170px;
 transform:scaleX(-1) rotate(-35deg);
 }
 
-.text{
+/* Rose SVG */
+svg{
 position:absolute;
-top:30px;
-width:100%;
-text-align:center;
-font-size:30px;
-color:white;
-opacity:0;
-animation:show 2s 3s forwards;
-text-shadow:0 0 20px hotpink;
+left:-120px;
+top:-140px;
+transform:scale(0);
+animation:bloom 2.5s ease-out forwards;
 }
 
-@keyframes show{
-to{opacity:1;}
+@keyframes bloom{
+0%{transform:scale(0) rotate(-30deg);}
+60%{transform:scale(1.1) rotate(10deg);}
+100%{transform:scale(1) rotate(0deg);}
+}
+
+/* Glow center */
+.glow{
+filter: drop-shadow(0 0 10px #ff004c);
 }
 
 </style>
@@ -133,92 +137,69 @@ to{opacity:1;}
 
 <div class="scene">
 
-<div class="star" style="left:20px;top:40px;"></div>
-<div class="star" style="left:90px;top:100px;"></div>
-<div class="star" style="left:300px;top:60px;"></div>
-<div class="star" style="left:360px;top:150px;"></div>
-<div class="star" style="left:200px;top:20px;"></div>
+<!-- Stars -->
+<div class="star" style="left:30px;top:60px;"></div>
+<div class="star" style="left:120px;top:90px;"></div>
+<div class="star" style="left:320px;top:70px;"></div>
+<div class="star" style="left:380px;top:160px;"></div>
+<div class="star" style="left:220px;top:30px;"></div>
+<div class="star" style="left:80px;top:200px;"></div>
 
-<div class="text">🌸 For You 🌸</div>
+<div class="text">🌹 Blooming Red Rose 🌹</div>
 
 <div class="flower">
 
-<svg width="220" height="220" viewBox="0 0 220 220">
+<!-- ROSE SVG -->
+<svg width="240" height="240" viewBox="0 0 240 240" class="glow">
 
 <defs>
-  <radialGradient id="outerPetal" cx="50%" cy="40%">
-    <stop offset="0%" stop-color="#ffb3c6"/>
-    <stop offset="100%" stop-color="#d4004f"/>
-  </radialGradient>
 
-  <radialGradient id="innerPetal" cx="50%" cy="40%">
-    <stop offset="0%" stop-color="#ffd6e5"/>
-    <stop offset="100%" stop-color="#ff2d75"/>
-  </radialGradient>
+<radialGradient id="petal1">
+<stop offset="0%" stop-color="#ffb3c6"/>
+<stop offset="100%" stop-color="#c4003a"/>
+</radialGradient>
 
-  <filter id="shadow">
-    <feDropShadow dx="0" dy="3" stdDeviation="3"
-      flood-color="#000" flood-opacity="0.35"/>
-  </filter>
+<radialGradient id="petal2">
+<stop offset="0%" stop-color="#ffd1dc"/>
+<stop offset="100%" stop-color="#ff004c"/>
+</radialGradient>
 
 </defs>
 
-<g transform="translate(110,110)" filter="url(#shadow)">
+<g transform="translate(120,120)">
 
-  <!-- Outer petals -->
-  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
-      transform="rotate(0) translate(0,-40)"/>
-  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
-      transform="rotate(45) translate(0,-40)"/>
-  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
-      transform="rotate(90) translate(0,-40)"/>
-  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
-      transform="rotate(135) translate(0,-40)"/>
-  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
-      transform="rotate(180) translate(0,-40)"/>
-  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
-      transform="rotate(225) translate(0,-40)"/>
-  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
-      transform="rotate(270) translate(0,-40)"/>
-  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
-      transform="rotate(315) translate(0,-40)"/>
+<!-- Outer petals -->
+<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(0) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(45) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(90) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(135) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(180) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(225) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(270) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(315) translate(0,-45)"/>
 
-  <!-- Middle petals -->
-  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
-      transform="rotate(22) translate(0,-28)"/>
-  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
-      transform="rotate(67) translate(0,-28)"/>
-  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
-      transform="rotate(112) translate(0,-28)"/>
-  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
-      transform="rotate(157) translate(0,-28)"/>
-  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
-      transform="rotate(202) translate(0,-28)"/>
-  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
-      transform="rotate(247) translate(0,-28)"/>
-  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
-      transform="rotate(292) translate(0,-28)"/>
-  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
-      transform="rotate(337) translate(0,-28)"/>
+<!-- Inner petals -->
+<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(22) translate(0,-30)"/>
+<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(67) translate(0,-30)"/>
+<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(112) translate(0,-30)"/>
+<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(157) translate(0,-30)"/>
+<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(202) translate(0,-30)"/>
+<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(247) translate(0,-30)"/>
+<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(292) translate(0,-30)"/>
+<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(337) translate(0,-30)"/>
 
-  <!-- Rose center -->
-  <path d="
-      M-10 8
-      C-18 -8,-8 -24,5 -22
-      C20 -20,18 -2,8 6
-      C18 14,8 24,-6 22
-      C-16 18,-18 12,-10 8Z"
-      fill="#b0003a"/>
+<!-- Center -->
+<path d="
+M-10 10
+C-25 -10,-10 -30,10 -25
+C30 -20,25 5,10 15
+C25 25,10 35,-10 30
+C-25 25,-25 15,-10 10Z"
+fill="#8b0025"/>
 
-  <path d="
-      M-4 -12
-      C6 -22,18 -8,10 6
-      C0 18,-12 12,-8 -2
-      C-6 -8,-2 -10,-4 -12Z"
-      fill="#ff6fa1"/>
+<circle r="10" fill="#ff2d75"/>
 
 </g>
-
 </svg>
 
 <div class="stem"></div>
@@ -234,4 +215,4 @@ to{opacity:1;}
 </html>
 """
 
-st.components.v1.html(html, height=600)
+st.components.v1.html(html, height=650)
