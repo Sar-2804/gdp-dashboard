@@ -70,155 +70,90 @@ opacity:0;
 /* Flower */
 
 .flower{
-
-position:absolute;
-bottom:70px;
-left:50%;
-transform:translateX(-50%);
-animation:sway 5s ease-in-out infinite;
-
-}
-
-@keyframes sway{
-
-0%,100%{
-transform:translateX(-50%) rotate(-2deg);
-}
-
-50%{
-transform:translateX(-50%) rotate(2deg);
-}
-
-}
-
-/* Stem */
-
-.stem{
-
-width:8px;
-height:0;
-background:linear-gradient(#63ff8c,#0b8f39);
-border-radius:20px;
-margin:auto;
-animation:grow 3s forwards;
-
-}
-
-@keyframes grow{
-
-to{
-height:260px;
-}
-
-}
-
-/* Leaves */
-
-.leaf{
-
-position:absolute;
-width:90px;
-height:35px;
-background:linear-gradient(#48ff88,#11883e);
-border-radius:100px 0;
-box-shadow:0 0 15px rgba(0,255,120,.4);
-
-}
-
-.left{
-
-top:120px;
-left:-80px;
-transform:rotate(-35deg);
-animation:leafmove 3s infinite ease-in-out;
-
-}
-
-.right{
-
-top:170px;
-right:-80px;
-transform:scaleX(-1) rotate(-35deg);
-animation:leafmove 3s infinite ease-in-out;
-
-}
-
-@keyframes leafmove{
-
-50%{
-transform:rotate(-28deg);
-}
-
+    position:absolute;
+    bottom:70px;
+    left:50%;
+    width:180px;
+    height:320px;
+    transform:translateX(-50%);
+    animation:sway 5s ease-in-out infinite;
 }
 
 /* Petals */
 
 .petal{
+    position:absolute;
+    width:70px;
+    height:100px;
 
-position:absolute;
-width:70px;
-height:100px;
+    left:55px;
+    top:-40px;
 
-background:radial-gradient(circle at top,
-#ff9ecf,
-#ff3c93 70%,
-#c30065);
+    background:radial-gradient(circle at 30% 20%,
+        #ffd4ea 0%,
+        #ff6ab0 45%,
+        #ff0088 100%);
 
-border-radius:50% 50% 45% 45%;
-opacity:0;
+    border-radius:50% 50% 40% 40%;
 
-transform-origin:bottom center;
+    transform-origin:50% 100%;
+    opacity:0;
+    animation:bloom 1s forwards;
 
-animation:bloom 1.8s forwards;
-box-shadow:0 0 20px rgba(255,0,140,.5);
-
+    box-shadow:0 0 20px rgba(255,20,147,.4);
 }
 
-.p1{transform:rotate(0deg) translateY(-70px);animation-delay:2s;}
-.p2{transform:rotate(45deg) translateY(-70px);animation-delay:2.1s;}
-.p3{transform:rotate(90deg) translateY(-70px);animation-delay:2.2s;}
-.p4{transform:rotate(135deg) translateY(-70px);animation-delay:2.3s;}
-.p5{transform:rotate(180deg) translateY(-70px);animation-delay:2.4s;}
-.p6{transform:rotate(225deg) translateY(-70px);animation-delay:2.5s;}
-.p7{transform:rotate(270deg) translateY(-70px);animation-delay:2.6s;}
-.p8{transform:rotate(315deg) translateY(-70px);animation-delay:2.7s;}
+/* Petal positions */
+
+.p1{transform:rotate(0deg) scale(.1);animation-delay:2s;}
+.p2{transform:rotate(45deg) scale(.1);animation-delay:2.1s;}
+.p3{transform:rotate(90deg) scale(.1);animation-delay:2.2s;}
+.p4{transform:rotate(135deg) scale(.1);animation-delay:2.3s;}
+.p5{transform:rotate(180deg) scale(.1);animation-delay:2.4s;}
+.p6{transform:rotate(225deg) scale(.1);animation-delay:2.5s;}
+.p7{transform:rotate(270deg) scale(.1);animation-delay:2.6s;}
+.p8{transform:rotate(315deg) scale(.1);animation-delay:2.7s;}
+
+.p1{--r:0deg;}
+.p2{--r:45deg;}
+.p3{--r:90deg;}
+.p4{--r:135deg;}
+.p5{--r:180deg;}
+.p6{--r:225deg;}
+.p7{--r:270deg;}
+.p8{--r:315deg;}
 
 @keyframes bloom{
-
-0%{
-opacity:0;
-scale:.2;
-}
-
-100%{
-opacity:1;
-scale:1;
-}
-
+    from{
+        opacity:0;
+        transform:rotate(var(--r)) scale(.1);
+    }
+    to{
+        opacity:1;
+        transform:rotate(var(--r)) scale(1);
+    }
 }
 
 /* Flower center */
 
 .center{
+    position:absolute;
+    width:40px;
+    height:40px;
 
-position:absolute;
-top:-15px;
-left:-15px;
+    left:70px;
+    top:-5px;
 
-width:40px;
-height:40px;
+    border-radius:50%;
 
-border-radius:50%;
+    background:radial-gradient(circle,#fffad2,#ffd000,#ffb300);
 
-background:radial-gradient(circle,#fff9b0,#ffd000);
+    box-shadow:
+    0 0 15px yellow,
+    0 0 30px orange,
+    0 0 60px gold;
 
-box-shadow:
-0 0 15px yellow,
-0 0 35px orange,
-0 0 60px gold;
-
-animation:pulse 2s infinite;
-
+    animation:pulse 2s infinite;
 }
 
 @keyframes pulse{
@@ -284,21 +219,21 @@ opacity:1;
 
 <div class="flower">
 
-<div class="stem"></div>
+    <div class="stem"></div>
 
-<div class="leaf left"></div>
-<div class="leaf right"></div>
+    <div class="leaf left"></div>
+    <div class="leaf right"></div>
 
-<div class="petal p1"></div>
-<div class="petal p2"></div>
-<div class="petal p3"></div>
-<div class="petal p4"></div>
-<div class="petal p5"></div>
-<div class="petal p6"></div>
-<div class="petal p7"></div>
-<div class="petal p8"></div>
+    <div class="petal p1"></div>
+    <div class="petal p2"></div>
+    <div class="petal p3"></div>
+    <div class="petal p4"></div>
+    <div class="petal p5"></div>
+    <div class="petal p6"></div>
+    <div class="petal p7"></div>
+    <div class="petal p8"></div>
 
-<div class="center"></div>
+    <div class="center"></div>
 
 </div>
 
