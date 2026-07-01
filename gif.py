@@ -185,8 +185,8 @@ animation:bloom 2.5s ease-out forwards;
   <div class="letter">
     <h2>💌 A Surprise for You 💌</h2>
     <p>
-      Someone special has sent you a blooming rose...<br>
-      Click below to open your surprise 🌹
+      Something Special For You<br>
+      Click below to open it🌹
     </p>
     <button class="openBtn" onclick="openLetter()">Open</button>
   </div>
