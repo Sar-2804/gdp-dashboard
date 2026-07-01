@@ -155,6 +155,31 @@ opacity:0;
 
     animation:pulse 2s infinite;
 }
+.left{
+    top:120px;
+    left:-70px;
+    transform:rotate(-35deg);
+    animation:leftleaf 3s ease-in-out infinite;
+}
+
+.right{
+    top:170px;
+    right:-70px;
+    transform:scaleX(-1) rotate(-35deg);
+    animation:rightleaf 3s ease-in-out infinite;
+}
+
+@keyframes leftleaf{
+    50%{
+        transform:rotate(-25deg);
+    }
+}
+
+@keyframes rightleaf{
+    50%{
+        transform:scaleX(-1) rotate(-25deg);
+    }
+}
 
 @keyframes pulse{
 
