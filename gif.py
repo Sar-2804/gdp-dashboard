@@ -71,14 +71,23 @@ to{height:240px;}
 
 svg{
 position:absolute;
-left:-90px;
-top:-95px;
-animation:bloom 2s forwards;
-transform:scale(0);
+left:-110px;
+top:-120px;
+transform:scale(0) rotate(-30deg);
+animation:bloom 2.5s ease-out forwards;
+transform-origin:center;
 }
 
 @keyframes bloom{
-to{transform:scale(1);}
+0%{
+    transform:scale(0) rotate(-40deg);
+}
+60%{
+    transform:scale(1.1) rotate(8deg);
+}
+100%{
+    transform:scale(1) rotate(0deg);
+}
 }
 
 .leaf{
