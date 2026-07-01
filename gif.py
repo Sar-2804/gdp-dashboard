@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title="Blooming Red Rose", layout="centered")
+st.set_page_config(page_title="Rose Surprise", layout="centered")
 
 html = """
 <!DOCTYPE html>
@@ -34,11 +34,10 @@ height:3px;
 background:white;
 border-radius:50%;
 animation:blink 2s infinite;
-opacity:0.8;
 }
 
 @keyframes blink{
-50%{opacity:0.1; transform:scale(0.7);}
+50%{opacity:0.2;}
 }
 
 /* Title */
@@ -47,46 +46,87 @@ position:absolute;
 top:20px;
 width:100%;
 text-align:center;
-font-size:28px;
+font-size:26px;
 color:#ffb3c6;
 text-shadow:0 0 15px #ff2d75;
-opacity:0;
-animation:fadeIn 2s 2s forwards;
 }
 
-@keyframes fadeIn{
-to{opacity:1;}
-}
-
-/* Flower container */
-.flower{
+/* Button */
+button{
 position:absolute;
-bottom:60px;
+bottom:40px;
 left:50%;
 transform:translateX(-50%);
-animation:sway 4s ease-in-out infinite;
-transform-origin:bottom center;
+padding:12px 25px;
+font-size:16px;
+border:none;
+border-radius:25px;
+cursor:pointer;
+background:#ff2d75;
+color:white;
+box-shadow:0 0 15px #ff2d75;
 }
 
-@keyframes sway{
-0%,100%{transform:translateX(-50%) rotate(-3deg);}
-50%{transform:translateX(-50%) rotate(3deg);}
+/* Envelope */
+.envelope{
+position:absolute;
+top:200px;
+left:50%;
+transform:translateX(-50%);
+width:190px;
+height:130px;
+background:#ff4d6d;
+border-radius:10px;
+box-shadow:0 0 25px rgba(255,0,80,0.4);
+animation:float 3s infinite;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+@keyframes float{
+50%{transform:translateX(-50%) translateY(-10px);}
+}
+
+/* Letter */
+.letter{
+width:160px;
+height:100px;
+background:white;
+border-radius:8px;
+text-align:center;
+padding-top:20px;
+font-size:14px;
+color:#ff2d75;
+font-weight:bold;
+}
+
+/* Rose */
+.flower{
+position:absolute;
+bottom:80px;
+left:50%;
+transform:translateX(-50%) scale(0);
+}
+
+/* Bloom animation */
+.bloom{
+animation:bloom 2.5s ease-out forwards;
+}
+
+@keyframes bloom{
+0%{transform:translateX(-50%) scale(0) rotate(-20deg);}
+60%{transform:translateX(-50%) scale(1.1) rotate(10deg);}
+100%{transform:translateX(-50%) scale(1) rotate(0);}
 }
 
 /* Stem */
 .stem{
 width:10px;
-height:260px;
-background:linear-gradient(#00ff88, #0a6b2f);
+height:240px;
+background:linear-gradient(#00ff88,#0a6b2f);
 margin:auto;
 border-radius:20px;
-animation:grow 2s ease-out forwards;
-transform-origin:bottom;
-}
-
-@keyframes grow{
-from{height:0;}
-to{height:260px;}
 }
 
 /* Leaves */
@@ -94,41 +134,15 @@ to{height:260px;}
 position:absolute;
 width:80px;
 height:40px;
-background:linear-gradient(#2cff6b, #0a7a30);
+background:linear-gradient(#2cff6b,#0a7a30);
 border-radius:80px 0;
 }
 
-.left{
-left:-65px;
-top:120px;
-transform:rotate(-35deg);
-}
+.left{left:-60px;top:120px;transform:rotate(-35deg);}
+.right{right:-60px;top:170px;transform:scaleX(-1) rotate(-35deg);}
 
-.right{
-right:-65px;
-top:170px;
-transform:scaleX(-1) rotate(-35deg);
-}
-
-/* Rose SVG */
-svg{
-position:absolute;
-left:-120px;
-top:-140px;
-transform:scale(0);
-animation:bloom 2.5s ease-out forwards;
-}
-
-@keyframes bloom{
-0%{transform:scale(0) rotate(-30deg);}
-60%{transform:scale(1.1) rotate(10deg);}
-100%{transform:scale(1) rotate(0deg);}
-}
-
-/* Glow center */
-.glow{
-filter: drop-shadow(0 0 10px #ff004c);
-}
+/* Hidden */
+.hidden{display:none;}
 
 </style>
 </head>
@@ -141,77 +155,70 @@ filter: drop-shadow(0 0 10px #ff004c);
 <div class="star" style="left:30px;top:60px;"></div>
 <div class="star" style="left:120px;top:90px;"></div>
 <div class="star" style="left:320px;top:70px;"></div>
-<div class="star" style="left:380px;top:160px;"></div>
-<div class="star" style="left:220px;top:30px;"></div>
-<div class="star" style="left:80px;top:200px;"></div>
 
-<div class="text">🌹 Blooming Flower🌹<br> For You</div>
+<div class="text">🎁 A Surprise for You 🎁</div>
 
+<!-- Envelope (START SCREEN) -->
+<div id="envelope" class="envelope">
+    <div class="letter">
+        💌<br>
+        Open me...<br>
+        A surprise awaits 🌹
+    </div>
+</div>
 
+<!-- Button -->
+<button onclick="openSurprise()">Open Surprise</button>
 
-<div class="flower">
+<!-- Rose (HIDDEN INITIALLY) -->
+<div id="rose" class="flower hidden">
 
-<!-- ROSE SVG -->
-<svg width="240" height="240" viewBox="0 0 240 240" class="glow">
+<svg width="240" height="240" viewBox="0 0 240 240">
 
 <defs>
-
-<radialGradient id="petal1">
+<radialGradient id="petal">
 <stop offset="0%" stop-color="#ffb3c6"/>
 <stop offset="100%" stop-color="#c4003a"/>
 </radialGradient>
-
-<radialGradient id="petal2">
-<stop offset="0%" stop-color="#ffd1dc"/>
-<stop offset="100%" stop-color="#ff004c"/>
-</radialGradient>
-
 </defs>
 
 <g transform="translate(120,120)">
 
-<!-- Outer petals -->
-<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(0) translate(0,-45)"/>
-<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(45) translate(0,-45)"/>
-<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(90) translate(0,-45)"/>
-<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(135) translate(0,-45)"/>
-<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(180) translate(0,-45)"/>
-<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(225) translate(0,-45)"/>
-<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(270) translate(0,-45)"/>
-<ellipse rx="30" ry="70" fill="url(#petal1)" transform="rotate(315) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal)" transform="rotate(0) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal)" transform="rotate(45) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal)" transform="rotate(90) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal)" transform="rotate(135) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal)" transform="rotate(180) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal)" transform="rotate(225) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal)" transform="rotate(270) translate(0,-45)"/>
+<ellipse rx="30" ry="70" fill="url(#petal)" transform="rotate(315) translate(0,-45)"/>
 
-<!-- Inner petals -->
-<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(22) translate(0,-30)"/>
-<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(67) translate(0,-30)"/>
-<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(112) translate(0,-30)"/>
-<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(157) translate(0,-30)"/>
-<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(202) translate(0,-30)"/>
-<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(247) translate(0,-30)"/>
-<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(292) translate(0,-30)"/>
-<ellipse rx="22" ry="55" fill="url(#petal2)" transform="rotate(337) translate(0,-30)"/>
-
-<!-- Center -->
-<path d="
-M-10 10
-C-25 -10,-10 -30,10 -25
-C30 -20,25 5,10 15
-C25 25,10 35,-10 30
-C-25 25,-25 15,-10 10Z"
-fill="#8b0025"/>
-
-<circle r="10" fill="#ff2d75"/>
+<circle r="12" fill="#ff2d75"/>
 
 </g>
 </svg>
 
 <div class="stem"></div>
-
 <div class="leaf left"></div>
 <div class="leaf right"></div>
 
 </div>
 
 </div>
+
+<script>
+
+function openSurprise(){
+
+    document.getElementById("envelope").style.display = "none";
+
+    let rose = document.getElementById("rose");
+    rose.classList.remove("hidden");
+    rose.classList.add("bloom");
+
+}
+
+</script>
 
 </body>
 </html>
