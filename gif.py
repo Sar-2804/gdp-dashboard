@@ -143,29 +143,79 @@ to{opacity:1;}
 
 <div class="flower">
 
-<svg width="180" height="180">
+<svg width="220" height="220" viewBox="0 0 220 220">
 
 <defs>
+  <radialGradient id="outerPetal" cx="50%" cy="40%">
+    <stop offset="0%" stop-color="#ffb3c6"/>
+    <stop offset="100%" stop-color="#d4004f"/>
+  </radialGradient>
 
-<radialGradient id="petal">
-<stop offset="0%" stop-color="#ffd1e8"/>
-<stop offset="100%" stop-color="#ff1493"/>
-</radialGradient>
+  <radialGradient id="innerPetal" cx="50%" cy="40%">
+    <stop offset="0%" stop-color="#ffd6e5"/>
+    <stop offset="100%" stop-color="#ff2d75"/>
+  </radialGradient>
+
+  <filter id="shadow">
+    <feDropShadow dx="0" dy="3" stdDeviation="3"
+      flood-color="#000" flood-opacity="0.35"/>
+  </filter>
 
 </defs>
 
-<g transform="translate(90 90)">
+<g transform="translate(110,110)" filter="url(#shadow)">
 
-<ellipse rx="28" ry="60" fill="url(#petal)" transform="rotate(0) translate(0,-40)"/>
-<ellipse rx="28" ry="60" fill="url(#petal)" transform="rotate(45) translate(0,-40)"/>
-<ellipse rx="28" ry="60" fill="url(#petal)" transform="rotate(90) translate(0,-40)"/>
-<ellipse rx="28" ry="60" fill="url(#petal)" transform="rotate(135) translate(0,-40)"/>
-<ellipse rx="28" ry="60" fill="url(#petal)" transform="rotate(180) translate(0,-40)"/>
-<ellipse rx="28" ry="60" fill="url(#petal)" transform="rotate(225) translate(0,-40)"/>
-<ellipse rx="28" ry="60" fill="url(#petal)" transform="rotate(270) translate(0,-40)"/>
-<ellipse rx="28" ry="60" fill="url(#petal)" transform="rotate(315) translate(0,-40)"/>
+  <!-- Outer petals -->
+  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
+      transform="rotate(0) translate(0,-40)"/>
+  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
+      transform="rotate(45) translate(0,-40)"/>
+  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
+      transform="rotate(90) translate(0,-40)"/>
+  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
+      transform="rotate(135) translate(0,-40)"/>
+  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
+      transform="rotate(180) translate(0,-40)"/>
+  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
+      transform="rotate(225) translate(0,-40)"/>
+  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
+      transform="rotate(270) translate(0,-40)"/>
+  <ellipse rx="28" ry="65" fill="url(#outerPetal)"
+      transform="rotate(315) translate(0,-40)"/>
 
-<circle r="18" fill="gold"/>
+  <!-- Middle petals -->
+  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
+      transform="rotate(22) translate(0,-28)"/>
+  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
+      transform="rotate(67) translate(0,-28)"/>
+  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
+      transform="rotate(112) translate(0,-28)"/>
+  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
+      transform="rotate(157) translate(0,-28)"/>
+  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
+      transform="rotate(202) translate(0,-28)"/>
+  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
+      transform="rotate(247) translate(0,-28)"/>
+  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
+      transform="rotate(292) translate(0,-28)"/>
+  <ellipse rx="22" ry="50" fill="url(#innerPetal)"
+      transform="rotate(337) translate(0,-28)"/>
+
+  <!-- Rose center -->
+  <path d="
+      M-10 8
+      C-18 -8,-8 -24,5 -22
+      C20 -20,18 -2,8 6
+      C18 14,8 24,-6 22
+      C-16 18,-18 12,-10 8Z"
+      fill="#b0003a"/>
+
+  <path d="
+      M-4 -12
+      C6 -22,18 -8,10 6
+      C0 18,-12 12,-8 -2
+      C-6 -8,-2 -10,-4 -12Z"
+      fill="#ff6fa1"/>
 
 </g>
 
